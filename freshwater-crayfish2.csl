@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" demote-non-dropping-particle="sort-only" default-locale="en-US" version="1.0">
+  <info>
+    <title>Freshwater Crayfish</title>
+    <id>http://www.zotero.org/styles/freshwater-crayfish</id>
+    <link href="http://www.zotero.org/styles/freshwater-crayfish" rel="self" />
+    <link href="http://www.zotero.org/styles/heredity" rel="template" />
+    <link href="http://www.FreshwaterCrayfish.org/FC.asp" rel="documentation" />
+    <author>
+      <name>James Fetzner</name>
+      <email>FetznerJ@CarnegieMNH.Org</email>
+    </author>
+    <category citation-format="author-date" />
+    <category field="biology" />
+    <issn>2076-4324</issn>
+    <eissn>2076-4332</eissn>
+    <updated>2017-08-01T11:25:33+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <macro name="editor-translator">
+    <names delimiter=", " suffix=")" prefix="(" variable="editor translator">
+      <name delimiter=", " initialize-with="" and="text" />
+      <label prefix=", " text-case="capitalize-first" form="short" />
+    </names>
+  </macro>
+  <macro name="author">
+    <names variable="author" font-variant="small-caps">
+      <name delimiter=", " initialize-with="" and="text" delimiter-precedes-last="never" sort-separator=" " name-as-sort-order="all" />
+      <label suffix=")" prefix=" (" text-case="capitalize-first" form="short" />
+      <et-al font-style="italic" />
+      <substitute>
+        <names variable="editor" />
+        <names variable="translator" />
+        <text macro="title" />
+      </substitute>
+    </names>
+  </macro>
+  <macro name="author-short">
+    <names variable="author">
+      <name delimiter=", " initialize-with=". " and="text" form="short" />
+      <et-al font-style="italic" />
+      <substitute>
+        <names variable="editor" />
+        <names variable="translator" />
+        <choose>
+          <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+            <text variable="title" form="short" font-style="italic" />
+          </if>
+          <else>
+            <text variable="title" form="short" quotes="true" />
+          </else>
+        </choose>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="title">
+    <choose>
+      <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+        <text variable="title" font-style="italic" />
+      </if>
+      <else>
+        <text variable="title" />
+      </else>
+    </choose>
+  </macro>
+  <macro name="publisher">
+    <group delimiter=": ">
+      <text variable="publisher" />
+      <text variable="publisher-place" />
+    </group>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <number variable="edition" form="ordinal" />
+          <text suffix="n." form="short" strip-periods="true" term="edition" />
+        </group>
+      </if>
+      <else>
+        <text variable="edition" />
+      </else>
+    </choose>
+  </macro>
+  <citation disambiguate-add-names="true" disambiguate-add-year-suffix="true" et-al-use-first="1" et-al-min="3" collapse="year">
+    <sort>
+      <key variable="issued" />
+      <key variable="author" />
+    </sort>
+    <layout delimiter="; " suffix=")" prefix="(">
+      <group delimiter=" ">
+        <text macro="author-short" />
+        <date variable="issued">
+          <date-part name="year" />
+        </date>
+        <group>
+          <label variable="locator" form="short" />
+          <text prefix=" " variable="locator" />
+        </group>
+      </group>
+    </layout>
+  </citation>
+  <bibliography et-al-use-first="6" et-al-min="7" hanging-indent="true">
+    <sort>
+      <key macro="author-short" />
+      <key variable="issued" />
+    </sort>
+    <layout>
+      <text suffix=" " macro="author" />
+      <date suffix=")." prefix="(" variable="issued">
+        <date-part name="year" />
+      </date>
+      <choose>
+        <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+          <group suffix=".">
+            <text prefix=" " macro="title" />
+            <text prefix=", " macro="edition" />
+            <text prefix=" " macro="editor-translator" />
+          </group>
+          <text suffix="." prefix=" " macro="publisher" />
+        </if>
+        <else-if type="thesis">
+          <group suffix=".">
+            <text suffix="." prefix=" " macro="title" />
+            <text suffix=" Thesis," prefix=" " variable="genre" />
+            <text prefix=" " variable="publisher" />
+          </group>
+        </else-if>
+        <else-if type="chapter paper-conference" match="any">
+          <text prefix=" " macro="title" />
+          <group prefix=".">
+            <group prefix=" In:">
+              <names variable="editor translator">
+                <name delimiter=", " prefix=" " initialize-with="" delimiter-precedes-last="always" sort-separator=" " name-as-sort-order="all" />
+                <label suffix=") " prefix=" (" form="short" strip-periods="true" />
+              </names>
+              <text suffix="," prefix=" " variable="container-title" font-style="italic" />
+              <text suffix="." prefix=" " variable="collection-title" />
+              <group suffix=".">
+                <text prefix=" " macro="publisher" />
+                <text prefix=" Vol " variable="volume" />
+                <label suffix=" " prefix=", " variable="page" form="short" strip-periods="true" />
+                <text suffix="." variable="page" />
+              </group>
+            </group>
+          </group>
+        </else-if>
+        <else>
+          <group suffix=".">
+            <text prefix=" " macro="title" />
+            <text prefix=" " macro="editor-translator" />
+          </group>
+          <group suffix="." prefix=" ">
+            <text variable="container-title" font-style="italic" />
+            <!--form="short" strip-periods="true"-->
+            <group prefix=" ">
+              <text variable="volume" />
+              <!--font-weight="bold"-->
+              <text suffix=")" prefix="(" variable="issue" />
+            </group>
+            <text prefix=": " variable="page" />
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
